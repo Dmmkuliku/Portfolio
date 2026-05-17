@@ -13,16 +13,16 @@ app.use(express.json());
 // Render uses process.env.PORT dynamically. Locally it defaults to 5000.
 const PORT = process.env.PORT || 5000;
 
-// 2. Configure the Nodemailer Email Transporter (Upgraded to explicit secure Port 465 routing)
+// 2. Configure the Nodemailer Transporter to use the Resend Unblocked Gateway
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    host: 'smtp.resend.com',
     port: 465,
-    secure: true, // true for port 465 (SSL encryption tunnel)
+    secure: true, // Uses secure SSL encryption tunnel natively
     auth: {
-        user: process.env.EMAIL_USER,      // Saved securely on Render
-        pass: process.env.EMAIL_PASS       // Google App Password saved on Render
+        user: 'resend',                  // This must literally be the text 'resend'
+        pass: process.env.EMAIL_PASS     // Your secure Resend API Key saved on Render (re_...)
     },
-    connectionTimeout: 10000 // Stops the server from hanging indefinitely if network drops
+    connectionTimeout: 10000
 });
 
 // 1. Health-Check / Status Route
@@ -30,7 +30,7 @@ app.get('/api/status', (req, res) => {
     res.json({ message: "Online and Connected to Cloud Backend!" });
 });
 
-// 2. Contact Form Processing Route (Upgraded with Email Delivery)
+// 2. Contact Form Processing Route (Upgraded with Resend Email Delivery)
 app.post('/api/contact', (req, res) => {
     const { name, email, message } = req.body;
 
@@ -48,9 +48,9 @@ app.post('/api/contact', (req, res) => {
 
     // 3. Set up the layout of the email that will arrive in your Gmail box
     const mailOptions = {
-        from: process.env.EMAIL_USER, 
-        to: process.env.EMAIL_USER, // Sends the email right back to yourself
-        replyTo: email,             // If you click "Reply" in your inbox, it replies straight to the sender!
+        from: 'onboarding@resend.dev', // Resend's default verified system sender
+        to: process.env.EMAIL_USER,    // Your personal Gmail (raymondtungaraza20@gmail.com)
+        replyTo: email,                // Clicking "Reply" in your inbox replies directly to the client
         subject: `💼 Portfolio Message from ${name}`,
         html: `
             <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; max-width: 600px;">
@@ -70,7 +70,7 @@ app.post('/api/contact', (req, res) => {
             return res.status(500).json({ error: "Server encountered a delivery issue routing the email." });
         }
         
-        console.log("Mail sent successfully:", info.response);
+        console.log("Mail sent successfully via Resend:", info.response);
         
         // Respond back to Raymond's portfolio frontend
         res.json({ 
