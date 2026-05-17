@@ -13,13 +13,16 @@ app.use(express.json());
 // Render uses process.env.PORT dynamically. Locally it defaults to 5000.
 const PORT = process.env.PORT || 5000;
 
-// 2. Configure the Nodemailer Email Transporter (Using secure environment variables)
+// 2. Configure the Nodemailer Email Transporter (Upgraded to explicit secure Port 465 routing)
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // true for port 465 (SSL encryption tunnel)
     auth: {
         user: process.env.EMAIL_USER,      // Saved securely on Render
         pass: process.env.EMAIL_PASS       // Google App Password saved on Render
-    }
+    },
+    connectionTimeout: 10000 // Stops the server from hanging indefinitely if network drops
 });
 
 // 1. Health-Check / Status Route
