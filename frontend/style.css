@@ -9,6 +9,11 @@
     --accent-sms: #007AFF;
     --text-main: #2d3748;
     --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    
+    /* New Custom Colors for your Elite Data Science Badges */
+    --ml-color: #e74c3c;
+    --bigdata-color: #e67e22;
+    --sql-color: #2980b9;
 }
 
 * {
@@ -23,12 +28,15 @@ body {
     background-color: var(--light-bg);
     color: var(--text-main);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Header & Navigation */
 header {
     background: rgba(44, 62, 80, 0.95);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* iOS Safari Engine Fix */
     color: #fff;
     padding: 1.2rem 0;
     position: sticky;
@@ -60,6 +68,7 @@ nav ul {
     display: flex;
     list-style: none;
     gap: 1.5rem;
+    align-items: center;
 }
 
 nav ul li a {
@@ -91,6 +100,22 @@ nav ul li a:hover::after {
     width: 100%;
 }
 
+/* Mobile Hamburger Menu Toggle Trigger */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s;
+}
+
+.menu-toggle:hover {
+    color: var(--primary-color);
+}
+
 /* Base Sections styling */
 section {
     max-width: 1100px;
@@ -99,6 +124,7 @@ section {
     background: #ffffff;
     border-radius: 16px;
     box-shadow: var(--card-shadow);
+    width: calc(100% - 2rem); /* Auto scaling fluid padding container margins */
 }
 
 .section-title {
@@ -129,11 +155,13 @@ section {
     border-radius: 0 0 24px 24px;
     margin-top: 0;
     max-width: 100%;
+    width: 100%;
 }
 
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 0.5rem;
+    line-height: 1.2;
 }
 
 .hero h1 span {
@@ -172,10 +200,10 @@ section {
     transform: translateY(-3px);
 }
 
-/* Categorized Skills System Layout */
+/* Categorized Skills System Layout - Upgraded Responsive Flex Grid */
 .skills-grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
@@ -208,10 +236,11 @@ section {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* Elite Colors */
 .r-lang { background: #1f618d; }
 .python { background: #2e4053; }
 .excel { background: #1e8449; }
@@ -221,6 +250,9 @@ section {
 .django { background: #117a65; }
 .cloud { background: #2980b9; }
 .graphics { background: #9b59b6; }
+.ml { background: var(--ml-color); }
+.bigdata { background: var(--bigdata-color); }
+.sql { background: var(--sql-color); }
 
 /* Timeline Qualifications */
 .timeline {
@@ -246,6 +278,7 @@ section {
     text-align: center;
     line-height: 26px;
     font-size: 0.8rem;
+    z-index: 2;
 }
 
 .timeline-item h4 {
@@ -261,7 +294,7 @@ section {
 /* Projects Grid Layout */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
@@ -378,7 +411,7 @@ form input, form textarea {
     font-size: 1rem;
     outline: none;
     background: var(--light-bg);
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, background-color 0.3s;
 }
 
 form input:focus, form textarea:focus {
@@ -422,9 +455,100 @@ footer {
     border-top: 3px solid var(--primary-color);
 }
 
+/* ==========================================================
+   ADVANCED UNIFIED DEVICE BREAKPOINTS (Android, iOS, Tablets)
+   ========================================================== */
+
+@media (max-width: 992px) {
+    .hero h1 { font-size: 2.6rem; }
+    section { padding: 2.5rem 1.5rem; }
+}
+
 @media(max-width: 768px) {
-    nav { flex-direction: column; gap: 1rem; }
-    .quick-contact-container { flex-direction: column; align-items: center; }
-    .quick-btn { width: 100%; justify-content: center; }
-    .hero h1 { font-size: 2.2rem; }
+    nav {
+        position: relative;
+        padding: 0 1.5rem;
+    }
+    
+    .menu-toggle {
+        display: block; /* Hamburger button visible on mobile layout viewports */
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 3.5rem;
+        left: 0;
+        background: rgba(44, 62, 80, 0.98);
+        padding: 1.5rem;
+        gap: 1rem;
+        border-bottom: 3px solid var(--primary-color);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Activated state via internal toggle click function */
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 0.6rem 0;
+        font-size: 1.1rem;
+    }
+
+    section {
+        padding: 2rem 1rem;
+        margin: 2.5rem auto;
+    }
+
+    .hero {
+        padding: 4.5rem 1rem;
+    }
+
+    .hero h1 { 
+        font-size: 2.1rem; 
+    }
+    
+    .hero h3 {
+        font-size: 1.2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .skills-grid-container {
+        grid-template-columns: 1fr; /* Stack categories in single column neatly on touch targets */
+    }
+
+    .timeline {
+        padding-left: 1.5rem;
+    }
+
+    .quick-contact-container { 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 1rem;
+    }
+    
+    .quick-btn { 
+        width: 100%; 
+        justify-content: center; 
+        padding: 0.9rem;
+    }
+}
+
+/* Ultra Small Smart-Device Optimizations */
+@media (max-width: 480px) {
+    .section-title { font-size: 1.8rem; }
+    .hero h1 { font-size: 1.8rem; }
+    .project-card { padding: 2rem 1.2rem; }
 }
