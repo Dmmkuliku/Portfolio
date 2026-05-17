@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer'); // 1. Imported nodemailer tool
+const { Resend } = require('resend'); // 1. Swapped out nodemailer for the Resend HTTP SDK
 
 const app = express();
 
@@ -13,25 +13,16 @@ app.use(express.json());
 // Render uses process.env.PORT dynamically. Locally it defaults to 5000.
 const PORT = process.env.PORT || 5000;
 
-// 2. Configure the Nodemailer Transporter to use the Resend Unblocked Gateway
-const transporter = nodemailer.createTransport({
-    host: 'smtp.resend.com',
-    port: 465,
-    secure: true, // Uses secure SSL encryption tunnel natively
-    auth: {
-        user: 'resend',                  // This must literally be the text 'resend'
-        pass: process.env.EMAIL_PASS     // Your secure Resend API Key saved on Render (re_...)
-    },
-    connectionTimeout: 10000
-});
+// 2. Initialize Resend using standard HTTPS Web Request (completely unblocked by Render)
+const resend = new Resend(process.env.EMAIL_PASS); 
 
 // 1. Health-Check / Status Route
 app.get('/api/status', (req, res) => {
     res.json({ message: "Online and Connected to Cloud Backend!" });
 });
 
-// 2. Contact Form Processing Route (Upgraded with Resend Email Delivery)
-app.post('/api/contact', (req, res) => {
+// 2. Contact Form Processing Route (Upgraded with HTTP API Delivery)
+app.post('/api/contact', async (req, res) => {
     const { name, email, message } = req.body;
 
     // Simple validation rule
@@ -43,40 +34,42 @@ app.post('/api/contact', (req, res) => {
     console.log(`=========================================`);
     console.log(`NEW PORTFOLIO MESSAGE FROM: ${name}`);
     console.log(`EMAIL: ${email}`);
-    console.log(`MESSAGE: ${message}`);
     console.log(`=========================================`);
 
-    // 3. Set up the layout of the email that will arrive in your Gmail box
-    const mailOptions = {
-        from: 'onboarding@resend.dev', // Resend's default verified system sender
-        to: process.env.EMAIL_USER,    // Your personal Gmail (raymondtungaraza20@gmail.com)
-        replyTo: email,                // Clicking "Reply" in your inbox replies directly to the client
-        subject: `💼 Portfolio Message from ${name}`,
-        html: `
-            <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; max-width: 600px;">
-                <h3 style="color: #1abc9c;">New Portfolio Contact Submission</h3>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Sender Email:</strong> ${email}</p>
-                <p><strong>Message Content:</strong></p>
-                <p style="background: #f5f7fa; padding: 15px; border-radius: 8px; border-left: 4px solid #1abc9c; color: #2d3748; line-height: 1.6;">${message}</p>
-            </div>
-        `
-    };
+    try {
+        // 3. Fire the email using Resend's secure web pipeline
+        const { data, error } = await resend.emails.send({
+            from: 'onboarding@resend.dev', // Resend's default safe verified system sender
+            to: process.env.EMAIL_USER,    // Your personal Gmail (raymondtungaraza20@gmail.com)
+            reply_to: email,               // Clicking "Reply" in your inbox goes straight to the sender
+            subject: `💼 Portfolio Message from ${name}`,
+            html: `
+                <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; max-width: 600px;">
+                    <h3 style="color: #1abc9c;">New Portfolio Contact Submission</h3>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Sender Email:</strong> ${email}</p>
+                    <p><strong>Message Content:</strong></p>
+                    <p style="background: #f5f7fa; padding: 15px; border-radius: 8px; border-left: 4px solid #1abc9c; color: #2d3748; line-height: 1.6;">${message}</p>
+                </div>
+            `
+        });
 
-    // 4. Fire the email out into the cloud!
-    transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.error("Mail Dispatch Error:", error);
-            return res.status(500).json({ error: "Server encountered a delivery issue routing the email." });
+            console.error("Resend API Internal Error:", error);
+            return res.status(500).json({ error: "Email delivery pipeline rejected the token validation." });
         }
-        
-        console.log("Mail sent successfully via Resend:", info.response);
+
+        console.log("Mail sent successfully via HTTP Web API. Message ID:", data.id);
         
         // Respond back to Raymond's portfolio frontend
         res.json({ 
             success: `Hi ${name}, your message was successfully processed and sent to Raymond's inbox!` 
         });
-    });
+
+    } catch (catchError) {
+        console.error("Network Catch Error:", catchError);
+        res.status(500).json({ error: "Server encountered a transmission error over the web port." });
+    }
 });
 
 // Start the server infrastructure
