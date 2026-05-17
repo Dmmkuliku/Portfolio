@@ -12,13 +12,16 @@
     <header>
         <nav>
             <div class="logo">Raymond<span>.Dev</span></div>
+            <button class="menu-toggle" aria-label="Toggle Menu" onclick="document.querySelector('nav ul').classList.toggle('active')">
+                <i class="fa-solid fa-bars"></i>
+            </button>
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#qualifications">Qualifications</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#location">Location</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about" onclick="document.querySelector('nav ul').classList.remove('active')">About</a></li>
+                <li><a href="#skills" onclick="document.querySelector('nav ul').classList.remove('active')">Skills</a></li>
+                <li><a href="#qualifications" onclick="document.querySelector('nav ul').classList.remove('active')">Qualifications</a></li>
+                <li><a href="#projects" onclick="document.querySelector('nav ul').classList.remove('active')">Projects</a></li>
+                <li><a href="#location" onclick="document.querySelector('nav ul').classList.remove('active')">Location</a></li>
+                <li><a href="#contact" onclick="document.querySelector('nav ul').classList.remove('active')">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -26,8 +29,8 @@
     <section id="about" class="hero">
         <div class="hero-content">
             <h1>Hello, It's <span>Raymond</span></h1>
-            <h3>Full-Stack Software Developer & Data Scientist</h3>
-            <p>Welcome to my cloud-deployed personal portfolio website. I specialize in building highly functional web applications, corporate systems, graphic design structures, and rigorous data-driven analytics platforms.</p>
+            <h3>AI Engineer & Data Scientist</h3>
+            <p>Welcome to my cloud-deployed personal portfolio website. I bridge the gap between heavy software systems and advanced intelligence models, specializing in data mining, predictive infrastructure, and real-time operational dashboard analytics platforms.</p>
             <a href="#contact" class="cta-btn">Let's Connect</a>
         </div>
     </section>
@@ -37,36 +40,38 @@
         <div class="skills-grid-container">
             
             <div class="skill-category-card">
-                <h4><i class="fa-solid fa-chart-pie"></i> Data Science & Analytics</h4>
+                <h4><i class="fa-solid fa-chart-pie"></i> Machine Learning & Predictive Analytics</h4>
                 <div class="skills-container">
-                    <span class="skill-badge r-lang"><i class="fa-solid fa-registered"></i> R Programming</span>
-                    <span class="skill-badge python"><i class="fa-brands fa-python"></i> Python Analytics</span>
-                    <span class="skill-badge excel"><i class="fa-regular fa-file-excel"></i> Advanced Excel</span>
+                    <span class="skill-badge r-lang"><i class="fa-solid fa-registered"></i> R (Statistical Modeling)</span>
+                    <span class="skill-badge python"><i class="fa-brands fa-python"></i> Python (Scikit-Learn & Pandas)</span>
+                    <span class="skill-badge ml"><i class="fa-solid fa-brain"></i> Predictive Pipelines & Deep Learning</span>
                 </div>
             </div>
 
             <div class="skill-category-card">
-                <h4><i class="fa-solid fa-gears"></i> Systems & Software Development</h4>
+                <h4><i class="fa-solid fa-database"></i> Big Data Infrastructure & SQL</h4>
                 <div class="skills-container">
-                    <span class="skill-badge php"><i class="fa-brands fa-php"></i> PHP (Laravel & Yii2)</span>
-                    <span class="skill-badge git"><i class="fa-brands fa-git-alt"></i> Git & GitHub Control</span>
-                    <span class="skill-badge python"><i class="fa-solid fa-code"></i> System Architecture</span>
+                    <span class="skill-badge sql"><i class="fa-solid fa-database"></i> Advanced SQL & Schema Architecture</span>
+                    <span class="skill-badge bigdata"><i class="fa-solid fa-server"></i> Big Data Tools (Apache Spark Eco)</span>
+                    <span class="skill-badge excel"><i class="fa-regular fa-file-excel"></i> Advanced Excel Modeling</span>
                 </div>
             </div>
 
             <div class="skill-category-card">
-                <h4><i class="fa-solid fa-laptop-code"></i> Web Architecture & Frameworks</h4>
+                <h4><i class="fa-solid fa-gears"></i> Systems & Backend Architecture</h4>
                 <div class="skills-container">
-                    <span class="skill-badge web"><i class="fa-brands fa-html5"></i> HTML5 / CSS3 / JS</span>
-                    <span class="skill-badge django"><i class="fa-solid fa-cubes"></i> Django & Flask</span>
-                    <span class="skill-badge cloud"><i class="fa-solid fa-cloud"></i> Cloud Deployment</span>
+                    <span class="skill-badge php"><i class="fa-brands fa-php"></i> PHP (Laravel Enterprise Framework)</span>
+                    <span class="skill-badge django"><i class="fa-solid fa-cubes"></i> Django & Flask Microservices</span>
+                    <span class="skill-badge git"><i class="fa-brands fa-git-alt"></i> Git Versioning & CI/CD Pipelines</span>
                 </div>
             </div>
 
             <div class="skill-category-card">
-                <h4><i class="fa-solid fa-bezier-curve"></i> Creative Arts</h4>
+                <h4><i class="fa-solid fa-laptop-code"></i> Cloud Deployment & UI Interfaces</h4>
                 <div class="skills-container">
-                    <span class="skill-badge graphics"><i class="fa-solid fa-palette"></i> Graphic Designing</span>
+                    <span class="skill-badge web"><i class="fa-brands fa-html5"></i> Front-end (Responsive HTML/CSS/JS)</span>
+                    <span class="skill-badge cloud"><i class="fa-solid fa-cloud"></i> Serverless Cloud Deployment</span>
+                    <span class="skill-badge graphics"><i class="fa-solid fa-palette"></i> Interactive Data UI Design</span>
                 </div>
             </div>
 
@@ -84,22 +89,22 @@
             <div class="timeline-item">
                 <i class="fa-solid fa-certificate timeline-icon"></i>
                 <h4>Web Development Certification</h4>
-                <p>IBM Certification</p>
+                <p>IBM Professional Credential</p>
             </div>
             <div class="timeline-item">
                 <i class="fa-solid fa-brain timeline-icon"></i>
                 <h4>Machine Learning Certifications</h4>
-                <p>IBM Certification</p>
+                <p>IBM Professional Credential</p>
             </div>
             <div class="timeline-item">
                 <i class="fa-solid fa-gears timeline-icon"></i>
                 <h4>Prompt Engineering Certification</h4>
-                <p>IBM Certification</p>
+                <p>IBM Professional Credential</p>
             </div>
             <div class="timeline-item">
                 <i class="fa-solid fa-database timeline-icon"></i>
                 <h4>SQL & Relational Database Certification</h4>
-                <p>IBM Certification</p>
+                <p>IBM Professional Credential</p>
             </div>
         </div>
     </section>
@@ -109,18 +114,18 @@
         <div class="projects-grid">
             <div class="project-card">
                 <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h3>Multivariate Analysis Platform</h3>
-                <p>An agricultural data processing application built using R and Python to calculate data summaries and variance distributions natively.</p>
+                <h3>Agricultural Multivariate Analytics Platform</h3>
+                <p>An agricultural vector processing system utilizing R and Python. Developed custom statistical modules to run multi-factor Analysis of Variance (ANOVA) and data matrix distributions for yield estimations.</p>
             </div>
             <div class="project-card">
                 <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3>Amen Affirmation Project</h3>
-                <p>A secure portal backed by Python Django framework handling asynchronous data transactions and user sessions smoothly.</p>
+                <h3>Amen Affirmation & Data Audit System</h3>
+                <p>A secure portal built on Python Django handling asymmetric data streams, preventing multi-access concurrency leaks, and tracking state modifications effortlessly.</p>
             </div>
             <div class="project-card">
                 <div class="card-icon"><i class="fa-solid fa-hotel"></i></div>
-                <h3>Mkuliku Courtage System</h3>
-                <p>An enterprise property booking and management system constructed utilizing PHP with the Laravel MVC framework and relational databases.</p>
+                <h3>Mkuliku Courtage Enterprise Engine</h3>
+                <p>A high-performance transaction application utilizing PHP Laravel MVC. Engineered a normalized MySQL database handling complex spatial availability scheduling queries.</p>
             </div>
         </div>
     </section>
@@ -130,13 +135,12 @@
         <p class="section-subtitle"><i class="fa-solid fa-location-dot"></i> Based in Dar es Salaam, Tanzania</p>
         <div class="map-wrapper">
             <iframe 
-                src="https://maps.google.com/maps?q=Eastern%20Africa%20Statistical%20Training%20Centre&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                src="https://www.openstreetmap.org/export/embed.html?bbox=39.20%2C-6.85%2C39.35%2C-6.75&amp;layer=mapnik" 
                 width="100%" 
-                height="450" 
+                height="400" 
                 style="border:0;" 
                 allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
+                loading="lazy">
             </iframe>
         </div>
     </section>
