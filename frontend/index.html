@@ -218,33 +218,31 @@
             });
         });
 
-        // 3. Asynchronous Form Engine (In-page background transmission)
+        // 3. Asynchronous Form Engine (Formbold Background JSON Pipeline)
         const form = document.getElementById('contactForm');
         const responseDiv = document.getElementById('formResponse');
 
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop standard browser page redirect or tab switching completely
+            e.preventDefault(); // Stop page redirect completely
             
-            // UI Status Update: Show loading status directly on the portfolio page
+            // Show loading animation directly over the portfolio form
             responseDiv.style.display = "block";
             responseDiv.style.backgroundColor = "rgba(26, 188, 156, 0.1)";
             responseDiv.style.color = "#1abc9c";
             responseDiv.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending message...';
 
-            // Extract the user inputs from the form elements
             const userName = document.getElementById('name').value;
             const userEmail = document.getElementById('email').value;
             const userMessage = document.getElementById('message').value;
 
-            // Construct the clean payload object matching Formspree requirements
             const jsonObject = {
                 name: userName,
                 email: userEmail,
                 message: userMessage
             };
 
-            // Post asynchronously in the background using direct JSON transmission headers
-            fetch('https://formspree.io/f/raymondtungaraza20@gmail.com', {
+            // Post asynchronously to Formbold's direct email gateway API
+            fetch('https://formbold.com/s/raymondtungaraza20@gmail.com', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -252,18 +250,17 @@
                 },
                 body: JSON.stringify(jsonObject)
             })
-            .then(async (response) => {
+            .then(response => {
                 if (response.ok) {
-                    // Success Display Update: Changes dynamically right over the contact form
+                    // Success Update: Stays right on your webpage cleanly
                     responseDiv.style.backgroundColor = "rgba(46, 204, 113, 0.1)";
                     responseDiv.style.color = "#2ecc71";
                     responseDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i> Transmission successful! Raymond will reach out shortly.';
-                    form.reset(); // Safely clear out form input blocks
+                    form.reset(); // Clear input elements cleanly
                 } else {
-                    let jsonRes = await response.json();
                     responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
                     responseDiv.style.color = "#e74c3c";
-                    responseDiv.innerHTML = jsonRes.error || "Submission failed. Verification parameters missing.";
+                    responseDiv.innerHTML = "Submission error. Gateway routing handshake pending confirmation.";
                 }
             })
             .catch(error => {
