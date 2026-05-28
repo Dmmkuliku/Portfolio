@@ -2,29 +2,41 @@
    1. VISUALLY REFINED VARIANT DICTIONARY (THEMES)
    ========================================== */
 :root[data-theme="light"] {
-    --bg-primary: #f8fafc;        /* Soft slate white */
-    --bg-secondary: #f1f5f9;      /* Light contrast slate */
-    --text-primary: #0f172a;      /* Dark slate for high contrast readability */
-    --text-secondary: #475569;    /* Muted slate text */
-    --accent: #0f766e;            /* Deep Teal */
-    --accent-hover: #115e59;      /* Darker Teal */
+    --text-primary: #0f172a;      
+    --text-secondary: #334155;    
+    --accent: #0f766e;            
+    --accent-hover: #115e59;      
     --accent-gradient: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
-    --card-bg: #ffffff;           /* Pure white cards */
-    --border-color: #e2e8f0;      /* Thin clean borders */
-    --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 16px -6px rgba(15, 23, 42, 0.04);
+    --card-bg: #ffffff;           
+    --border-color: rgba(15, 23, 42, 0.08);
+    --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+
+    /* Rich Light Section Color Blocks */
+    --bg-hero: radial-gradient(circle at 50% 30%, #f1f5f9 0%, #e2e8f0 100%);
+    --bg-skills: #f0fdf4;         /* Soft Emerald Green Block */
+    --bg-qualifications: #eff6ff; /* Soft Royal Blue Block */
+    --bg-projects: #faf5ff;       /* Soft Purple Block */
+    --bg-contact: #fff7ed;        /* Soft Warm Orange Block */
+    --bg-footer: #0f172a;
 }
 
 :root[data-theme="dark"] {
-    --bg-primary: #020617;        /* Ultra-deep obsidian blue */
-    --bg-secondary: #0f172a;      /* Deep navy slate */
-    --text-primary: #f8fafc;      /* Crisp off-white text */
-    --text-secondary: #94a3b8;    /* Soft silver text */
-    --accent: #38bdf8;            /* Vibrant Electric Cyan */
-    --accent-hover: #7dd3fc;      /* Soft neon blue */
+    --text-primary: #f8fafc;      
+    --text-secondary: #cbd5e1;    
+    --accent: #38bdf8;            
+    --accent-hover: #7dd3fc;      
     --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #0369a1 100%);
-    --card-bg: #0f172a;           /* Navy slate cards */
-    --border-color: #1e293b;      /* Dark structural borders */
-    --shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.7);
+    --card-bg: #1e293b;           
+    --border-color: rgba(255, 255, 255, 0.08);
+    --shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
+
+    /* Rich Dark Section Color Blocks */
+    --bg-hero: radial-gradient(circle at 50% 30%, #0f172a 0%, #020617 100%);
+    --bg-skills: #064e3b;         /* Deep Forest Emerald */
+    --bg-qualifications: #1e3a8a; /* Deep Atlantic Blue */
+    --bg-projects: #4c1d95;       /* Deep Imperial Purple */
+    --bg-contact: #431407;        /* Deep Terrecotta Crimson */
+    --bg-footer: #020617;
 }
 
 /* ==========================================
@@ -39,10 +51,10 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
-    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: var(--bg-hero);
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 a {
@@ -54,13 +66,15 @@ ul {
     list-style: none;
 }
 
+/* Base Responsive Section Structuring */
 section {
-    padding: 110px 10%;
+    padding: 120px 10%;
     border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.4s ease;
 }
 
 .section-title {
-    font-size: 2.4rem;
+    font-size: 2.5rem;
     text-align: center;
     margin-bottom: 12px;
     font-weight: 800;
@@ -71,28 +85,37 @@ section {
     text-align: center;
     color: var(--text-secondary);
     margin-bottom: 60px;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 500;
 }
 
 /* ==========================================
-   3. NAVIGATION ENGINE
+   3. SECTIONS COLOR BLOCK ASSIGNMENTS
+   ========================================== */
+.hero { background: var(--bg-hero); }
+#skills { background-color: var(--bg-skills); }
+#qualifications { background-color: var(--bg-qualifications); }
+#projects { background-color: var(--bg-projects); }
+#contact { background-color: var(--bg-contact); }
+
+/* ==========================================
+   4. NAVIGATION ENGINE
    ========================================== */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
-    transition: background-color 0.4s, border-color 0.4s;
+    transition: background-color 0.4s;
 }
 
 [data-theme="dark"] header {
-    background-color: rgba(2, 6, 23, 0.8);
+    background-color: rgba(2, 6, 23, 0.85);
 }
 
 nav {
@@ -101,13 +124,14 @@ nav {
     align-items: center;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 20px 10%;
+    padding: 20px 5%;
 }
 
 .logo {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 900;
     letter-spacing: 1.5px;
+    color: var(--text-primary);
 }
 
 .logo span {
@@ -117,7 +141,7 @@ nav {
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 35px;
+    gap: 30px;
 }
 
 .nav-actions ul {
@@ -127,7 +151,7 @@ nav {
 
 .nav-actions ul a {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     color: var(--text-secondary);
     transition: color 0.2s ease;
 }
@@ -139,7 +163,7 @@ nav {
 .theme-toggle-btn, .menu-toggle {
     background: none;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     cursor: pointer;
     color: var(--text-primary);
     display: flex;
@@ -149,13 +173,8 @@ nav {
     transition: color 0.2s;
 }
 
-.theme-toggle-btn:hover {
-    color: var(--accent);
-}
-
-.menu-toggle {
-    display: none;
-}
+.theme-toggle-btn:hover { color: var(--accent); }
+.menu-toggle { display: none; }
 
 [data-theme="light"] .icon-sun,
 [data-theme="dark"] .icon-moon {
@@ -163,7 +182,7 @@ nav {
 }
 
 /* ==========================================
-   4. HERO / LANDING INDUSTRIAL GRADIENT
+   5. HERO WORKSPACE
    ========================================== */
 .hero {
     display: flex;
@@ -171,13 +190,12 @@ nav {
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 95vh;
-    padding-top: 120px;
-    background: radial-gradient(circle at 50% 30%, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+    min-height: 100vh;
+    padding-top: 100px;
 }
 
 .hero h1 {
-    font-size: 3.8rem;
+    font-size: 4rem;
     line-height: 1.15;
     margin-bottom: 20px;
     max-width: 950px;
@@ -192,17 +210,17 @@ nav {
 }
 
 .hero h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 1.35rem;
+    font-weight: 700;
     color: var(--accent);
     margin-bottom: 30px;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
 }
 
 .hero p {
-    max-width: 720px;
-    font-size: 1.15rem;
+    max-width: 750px;
+    font-size: 1.2rem;
     color: var(--text-secondary);
     margin-bottom: 45px;
 }
@@ -210,50 +228,44 @@ nav {
 .cta-btn {
     background: var(--accent-gradient);
     color: #ffffff !important;
-    padding: 16px 38px;
+    padding: 16px 40px;
     border-radius: 30px;
-    font-weight: 600;
-    box-shadow: 0 10px 20px -5px rgba(13, 148, 136, 0.3);
+    font-weight: 700;
+    box-shadow: 0 10px 20px -5px rgba(13, 148, 136, 0.4);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-[data-theme="dark"] .cta-btn {
-    box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.3);
 }
 
 .cta-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 30px -5px rgba(13, 148, 136, 0.4);
-}
-
-[data-theme="dark"] .cta-btn:hover {
-    box-shadow: 0 15px 30px -5px rgba(56, 189, 248, 0.5);
+    box-shadow: 0 15px 30px -5px rgba(13, 148, 136, 0.5);
 }
 
 /* ==========================================
-   5. SKILLS GRID & UNIQUE COMPONENT BADGES
+   6. SKILLS DECK COMPARTMENTS
    ========================================== */
 .skills-grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .skill-category-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 32px;
     box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .skill-category-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 }
 
 .skill-category-card h4 {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     margin-bottom: 24px;
     display: flex;
     align-items: center;
@@ -262,19 +274,11 @@ nav {
     font-weight: 700;
 }
 
-.skill-category-card h4 i {
-    color: var(--accent);
-}
+.skill-category-card h4 i { color: var(--accent); }
+.skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
 
-.skills-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-/* Base Badge Geometric Settings */
 .skill-badge {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     padding: 8px 16px;
     border-radius: 30px;
     font-weight: 600;
@@ -285,21 +289,21 @@ nav {
     transition: all 0.2s ease;
 }
 
-/* --- LIGHT MODE INDIVIDUAL BADGE COLORS --- */
-[data-theme="light"] .python { background-color: #e0f2fe; color: #0369a1; }       /* Sky Blue */
-[data-theme="light"] .r-lang { background-color: #e0e7ff; color: #1d4ed8; }       /* Royal Indigo Blue */
-[data-theme="light"] .ml { background-color: #fae8ff; color: #86198f; }           /* Muted Orchid Purple */
-[data-theme="light"] .sql { background-color: #ccfbf1; color: #0f766e; }          /* Mint Teal */
-[data-theme="light"] .bigdata { background-color: #ffedd5; color: #c2410c; }      /* Amber Orange */
-[data-theme="light"] .excel { background-color: #dcfce7; color: #15803d; }        /* Emerald Green */
-[data-theme="light"] .php { background-color: #f5f3ff; color: #5b21b6; }          /* Deep Violet */
-[data-theme="light"] .django { background-color: #f3f4f6; color: #1f2937; }       /* Carbon Gray */
-[data-theme="light"] .git { background-color: #fee2e2; color: #b91c1c; }          /* Crimson Red */
-[data-theme="light"] .web { background-color: #fef9c3; color: #a16207; }          /* Gold Leaf */
-[data-theme="light"] .cloud { background-color: #ecfeff; color: #0e7490; }        /* Clear Cyan */
-[data-theme="light"] .graphics { background-color: #fce7f3; color: #be185d; }     /* Soft Pink Rose */
+/* Light Mode Individual Badges */
+[data-theme="light"] .python { background-color: #e0f2fe; color: #0369a1; }
+[data-theme="light"] .r-lang { background-color: #e0e7ff; color: #1d4ed8; }
+[data-theme="light"] .ml { background-color: #fae8ff; color: #86198f; }
+[data-theme="light"] .sql { background-color: #ccfbf1; color: #0f766e; }
+[data-theme="light"] .bigdata { background-color: #ffedd5; color: #c2410c; }
+[data-theme="light"] .excel { background-color: #dcfce7; color: #15803d; }
+[data-theme="light"] .php { background-color: #f5f3ff; color: #5b21b6; }
+[data-theme="light"] .django { background-color: #f3f4f6; color: #1f2937; }
+[data-theme="light"] .git { background-color: #fee2e2; color: #b91c1c; }
+[data-theme="light"] .web { background-color: #fef9c3; color: #a16207; }
+[data-theme="light"] .cloud { background-color: #ecfeff; color: #0e7490; }
+[data-theme="light"] .graphics { background-color: #fce7f3; color: #be185d; }
 
-/* --- DARK MODE INDIVIDUAL BADGE COLORS --- */
+/* Dark Mode Individual Badges */
 [data-theme="dark"] .python { background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
 [data-theme="dark"] .r-lang { background-color: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3); }
 [data-theme="dark"] .ml { background-color: rgba(192, 132, 252, 0.15); color: #c084fc; border-color: rgba(192, 132, 252, 0.3); }
@@ -313,20 +317,16 @@ nav {
 [data-theme="dark"] .cloud { background-color: rgba(34, 211, 238, 0.15); color: #22d3ee; border-color: rgba(34, 211, 238, 0.3); }
 [data-theme="dark"] .graphics { background-color: rgba(244, 114, 182, 0.15); color: #f472b6; border-color: rgba(244, 114, 182, 0.3); }
 
-/* Unified badge inheritance rules */
-.skill-badge i {
-    font-size: 0.95rem;
-    color: inherit;
-}
+.skill-badge i { font-size: 0.95rem; color: inherit; }
 
 /* ==========================================
-   6. METRIC-DRIVEN TIMELINE ARCHITECTURE
+   7. TIMELINE CONFIGURATION
    ========================================== */
 .timeline {
     max-width: 850px;
     margin: 20px auto 0 auto;
     position: relative;
-    padding-left: 35px;
+    padding-left: 40px;
 }
 
 .timeline::before {
@@ -334,61 +334,48 @@ nav {
     position: absolute;
     left: 0;
     top: 6px;
-    width: 2px;
+    width: 3px;
     height: 100%;
-    background: linear-gradient(to bottom, var(--accent) 0%, var(--border-color) 100%);
+    background: linear-gradient(to bottom, var(--accent) 0%, transparent 100%);
 }
 
-.timeline-item {
-    position: relative;
-    margin-bottom: 50px;
-}
-
-.timeline-item:last-child {
-    margin-bottom: 0;
-}
+.timeline-item { position: relative; margin-bottom: 50px; }
+.timeline-item:last-child { margin-bottom: 0; }
 
 .timeline-icon {
     position: absolute;
-    left: -49px;
+    left: -56px;
     top: 0;
     background: var(--accent-gradient);
     color: #ffffff;
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
-    box-shadow: 0 0 0 4px var(--bg-primary);
+    font-size: 0.9rem;
+    box-shadow: 0 0 0 4px var(--bg-qualifications);
 }
 
-.timeline-item h4 {
-    font-size: 1.30rem;
-    margin-bottom: 10px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-}
-
-.timeline-item p {
-    color: var(--text-secondary);
-    font-size: 1rem;
-}
+.timeline-item h4 { font-size: 1.4rem; margin-bottom: 10px; font-weight: 700; }
+.timeline-item p { color: var(--text-secondary); font-size: 1.05rem; }
 
 /* ==========================================
-   7. INNOVATIVE PROJECT DECK ARCHITECTURE
+   8. PROJECT CARDS DECK
    ========================================== */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     gap: 35px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .project-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 14px;
+    border-radius: 16px;
     padding: 35px;
     box-shadow: var(--shadow);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
@@ -397,7 +384,7 @@ nav {
 .project-card:hover {
     transform: translateY(-8px);
     border-color: var(--accent);
-    box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.12);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] .project-card:hover {
@@ -405,7 +392,7 @@ nav {
 }
 
 .card-icon {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -413,94 +400,52 @@ nav {
     display: inline-block;
 }
 
-.project-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 14px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-}
-
-.project-card p {
-    color: var(--text-secondary);
-    font-size: 0.98rem;
-    line-height: 1.6;
-}
+.project-card h3 { font-size: 1.45rem; margin-bottom: 14px; font-weight: 700; }
+.project-card p { color: var(--text-secondary); font-size: 1rem; }
 
 /* ==========================================
-   8. SECURE CONTACT MATRICES & INPUTS
+   9. CONTACT ENGINE HOOKS
    ========================================== */
-.status-container {
-    max-width: 620px;
-    margin: 0 auto 30px auto;
-}
-
-.status-banner {
-    padding: 14px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: 0.3px;
-}
+.status-container { max-width: 620px; margin: 0 auto 30px auto; }
+.status-banner { padding: 14px; border-radius: 30px; font-size: 0.92rem; font-weight: 700; text-align: center; }
 
 .status-success {
-    background-color: rgba(13, 148, 136, 0.1);
+    background-color: rgba(13, 148, 136, 0.12);
     color: #0d9488;
     border: 1px solid rgba(13, 148, 136, 0.25);
 }
 
 [data-theme="dark"] .status-success {
-    background-color: rgba(56, 189, 248, 0.08);
+    background-color: rgba(56, 189, 248, 0.1);
     color: #38bdf8;
     border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
-.quick-contact-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 45px;
-}
+.quick-contact-container { display: flex; justify-content: center; gap: 20px; margin-bottom: 45px; }
 
 .quick-btn {
     padding: 14px 32px;
     border-radius: 30px;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-weight: 700;
+    font-size: 1rem;
     display: inline-flex;
     align-items: center;
     gap: 10px;
     color: #ffffff !important;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: transform 0.2s;
 }
 
-.quick-btn:hover {
-    opacity: 0.95;
-    transform: translateY(-2px);
-}
+.quick-btn:hover { transform: translateY(-2px); }
+.whatsapp-btn { background-color: #128C7E; box-shadow: 0 6px 15px rgba(18, 140, 126, 0.25); }
+.sms-btn { background-color: #4f46e5; box-shadow: 0 6px 15px rgba(79, 70, 229, 0.25); }
 
-.whatsapp-btn { 
-    background-color: #128C7E; 
-    box-shadow: 0 6px 15px rgba(18, 140, 126, 0.2);
-}
-.sms-btn { 
-    background-color: #4f46e5; 
-    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.2);
-}
-
-form {
-    max-width: 620px;
-    margin: 0 auto;
-}
-
-.input-group {
-    margin-bottom: 24px;
-}
+form { max-width: 620px; margin: 0 auto; }
+.input-group { margin-bottom: 24px; }
 
 form input, form textarea {
     width: 100%;
     padding: 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: 1px solid var(--border-color);
     background-color: var(--card-bg);
     color: var(--text-primary);
@@ -512,18 +457,10 @@ form input, form textarea {
 
 form input:focus, form textarea:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
+    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.2);
 }
 
-[data-theme="dark"] form input:focus, 
-[data-theme="dark"] form textarea:focus {
-    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15);
-}
-
-form textarea {
-    height: 170px;
-    resize: vertical;
-}
+form textarea { height: 170px; resize: vertical; }
 
 .submit-btn {
     width: 100%;
@@ -539,51 +476,64 @@ form textarea {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    box-shadow: 0 6px 20px rgba(15, 118, 110, 0.2);
-    transition: opacity 0.2s;
+    box-shadow: 0 6px 20px rgba(15, 118, 110, 0.25);
 }
 
-.submit-btn:hover {
-    opacity: 0.95;
-}
-
-.submit-btn:disabled {
-    background-color: var(--text-secondary);
-    cursor: not-allowed;
-    opacity: 0.6;
-}
+.submit-btn:disabled { background: #64748b; cursor: not-allowed; box-shadow: none; }
 
 .map-wrapper {
     max-width: 620px;
     margin: 50px auto 0 auto;
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow);
 }
 
 /* ==========================================
-   9. SYSTEM FOOTER
+   10. FOOTER ARCHITECTURE
    ========================================== */
 footer {
     text-align: center;
-    padding: 50px 10%;
-    background-color: var(--bg-secondary);
-    color: var(--text-secondary);
-    font-size: 0.92rem;
+    padding: 50px 5%;
+    background-color: var(--bg-footer);
+    color: #94a3b8;
+    font-size: 0.95rem;
     font-weight: 500;
     border-top: 1px solid var(--border-color);
 }
 
 /* ==========================================
-   10. MOBILE MENU RESPONSIVE MODIFICATIONS
+   11. COMPREHENSIVE RESPONSIVITY MATRIX (Desktop, Tablet, Phone)
    ========================================== */
+
+/* --- 1. DESKTOP OPTIMIZATIONS (Large Screen Viewports) --- */
+@media (min-width: 1200px) {
+    section { padding: 130px 12%; }
+    .hero h1 { font-size: 4.2rem; }
+}
+
+/* --- 2. TABLET OPTIMIZATIONS (iPad, Landscape Phones) --- */
+@media (max-width: 1024px) {
+    section { padding: 100px 6%; }
+    .hero h1 { font-size: 3.4rem; }
+    .skills-grid-container { grid-template-columns: repeat(2, 1fr); }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- 3. MOBILE SMARTPHONE BREAKPOINTS --- */
 @media (max-width: 768px) {
-    section { padding: 80px 6%; }
-    .hero h1 { font-size: 2.6rem; letter-spacing: -1px; }
+    section { padding: 80px 5%; }
+    .hero h1 { font-size: 2.5rem; letter-spacing: -1px; }
+    .hero h3 { font-size: 1.1rem; }
+    .hero p { font-size: 1.1rem; }
     
+    .skills-grid-container { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+
     .menu-toggle { display: flex; }
     
+    /* Native Mobile Drawer Drawer Conversion */
     .nav-actions ul {
         display: none;
         flex-direction: column;
@@ -593,17 +543,12 @@ footer {
         width: 100%;
         background-color: var(--card-bg);
         border-bottom: 1px solid var(--border-color);
-        padding: 24px 0;
+        padding: 30px 0;
         box-shadow: var(--shadow);
-        gap: 20px;
+        gap: 24px;
     }
     
-    .nav-actions ul.mobile-active {
-        display: flex;
-    }
-    
-    .quick-contact-container {
-        flex-direction: column;
-        gap: 12px;
-    }
+    .nav-actions ul.mobile-active { display: flex; }
+    .quick-contact-container { flex-direction: column; gap: 15px; }
+    .quick-btn { justify-content: center; width: 100%; }
 }
