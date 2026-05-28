@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raymond Tungaraza | Data Science & Analytics Portfolio</title>
+    <!-- FontAwesome Icons for Badges and UI Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link to Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Header & Navigation Bar -->
     <header>
         <nav>
             <div class="logo">RAYMOND<span>TUNGARAZA</span></div>
@@ -20,10 +23,12 @@
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                <!-- Theme Toggle Button Framework -->
                 <button class="theme-toggle-btn" id="theme-switcher" aria-label="Toggle Theme">
                     <i class="fa-solid fa-sun icon-sun"></i>
                     <i class="fa-solid fa-moon icon-moon"></i>
                 </button>
+                <!-- Mobile Hamburger Menu Button -->
                 <button class="menu-toggle" id="menu-icon" aria-label="Toggle Navigation Menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
@@ -31,6 +36,7 @@
         </nav>
     </header>
 
+    <!-- Hero Identity Showcase Section -->
     <section class="hero" id="hero">
         <h1>Empowering Decisions Through <span>Data Science</span></h1>
         <h3>Data Scientist & Analyst • Predictive Modeling • Statistical Computing</h3>
@@ -40,10 +46,12 @@
         <a href="#contact" class="cta-btn">Initiate Consultation</a>
     </section>
 
+    <!-- Technical Skills Matrix Section -->
     <section id="skills">
         <h2 class="section-title">Technical Skills & Expertise</h2>
         <div class="skills-grid-container">
             
+            <!-- Card 1: Machine Learning -->
             <div class="skill-category-card">
                 <h4><i class="fa-solid fa-brain"></i> Machine Learning & Predictive Analytics</h4>
                 <div class="skills-container">
@@ -53,6 +61,7 @@
                 </div>
             </div>
 
+            <!-- Card 2: Statistical Computing -->
             <div class="skill-category-card">
                 <h4><i class="fa-solid fa-chart-pie"></i> Statistical Computing & Modeling</h4>
                 <div class="skills-container">
@@ -62,6 +71,7 @@
                 </div>
             </div>
 
+            <!-- Card 3: Big Data & SQL -->
             <div class="skill-category-card">
                 <h4><i class="fa-solid fa-database"></i> Big Data Infrastructure & SQL</h4>
                 <div class="skills-container">
@@ -71,6 +81,7 @@
                 </div>
             </div>
 
+            <!-- Card 4: Business Intelligence -->
             <div class="skill-category-card">
                 <h4><i class="fa-solid fa-chart-column"></i> Data Visualization & BI Platforms</h4>
                 <div class="skills-container">
@@ -80,6 +91,7 @@
                 </div>
             </div>
 
+            <!-- Card 5: Systems & Backend -->
             <div class="skill-category-card">
                 <h4><i class="fa-solid fa-cubes"></i> Systems & Backend Architecture</h4>
                 <div class="skills-container">
@@ -89,6 +101,7 @@
                 </div>
             </div>
 
+            <!-- Card 6: Cloud & UI Interfaces -->
             <div class="skill-category-card">
                 <h4><i class="fa-solid fa-laptop-code"></i> Cloud Deployment & UI Interfaces</h4>
                 <div class="skills-container">
@@ -101,6 +114,7 @@
         </div>
     </section>
 
+    <!-- Qualifications Timeline Section -->
     <section id="qualifications">
         <h2 class="section-title">Qualifications & Experience</h2>
         <div class="timeline">
@@ -122,6 +136,7 @@
         </div>
     </section>
 
+    <!-- Projects Portfolio Layout Showcase -->
     <section id="projects">
         <h2 class="section-title">Operational Innovations</h2>
         <div class="projects-grid">
@@ -143,16 +158,19 @@
         </div>
     </section>
 
+    <!-- Communications, Navigation & Contact System -->
     <section id="contact">
         <h2 class="section-title">Connect Professionally</h2>
         <p class="section-subtitle">Changanyikeni, Ubungo • Dar es Salaam, Tanzania</p>
         
+        <!-- Live Async Status Check Wrapper -->
         <div class="status-container">
             <div id="api-status" class="status-banner status-success">
                 <i class="fa-solid fa-circle-check"></i> Secure Connection Engine Online
             </div>
         </div>
 
+        <!-- Quick Integration Direct Launch Links -->
         <div class="quick-contact-container">
             <a href="https://wa.me/255655786630" class="quick-btn whatsapp-btn" target="_blank">
                 <i class="fa-brands fa-whatsapp"></i> WhatsApp Raymond
@@ -162,10 +180,10 @@
             </a>
         </div>
 
+        <!-- Contact Form using JSON API submission method -->
         <form id="contactForm">
-            <input type="hidden" name="access_key" value="7b7fa093-61fc-4048-bb8d-937b2d4ff99c">
-            
-            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+            <!-- RESTORED: Your original access key value -->
+            <input type="hidden" name="access_key" id="access_key" value="7b7fa093-61fc-4048-bb8d-937b2d4ff99c">
 
             <div class="input-group">
                 <input type="text" id="name" name="name" placeholder="Identity / Organization Name" required>
@@ -180,10 +198,12 @@
                 <i class="fa-solid fa-paper-plane"></i> Dispatch Transmission
             </button>
             
+            <!-- Dynamic placeholder targeting status feedback -->
             <div id="formResponse" style="display: none; margin-top: 15px; padding: 10px; border-radius: 8px; font-weight: 600;"></div>
         </form>
 
         <br><br>
+        <!-- Map Geometric Tracking Embed Space -->
         <div class="map-wrapper">
             <iframe 
                 src="https://maps.google.com/maps?q=Changanyikeni,%20Ubungo,%20Dar%20es%20Salaam&t=&z=14&ie=UTF8&iwloc=&output=embed" 
@@ -192,10 +212,12 @@
         </div>
     </section>
 
+    <!-- Document Terminal Footer -->
     <footer>
         <p>© 2026 Raymond Elphance Tungaraza. Data Science & Applied Computational Analytics.</p>
     </footer>
 
+    <!-- Light/Dark Mode Mechanism, Mobile Menu, and Restored JSON Email Render Engine -->
     <script>
         // 1. Theme Engine Switching Management Logic
         const themeButton = document.getElementById('theme-switcher');
@@ -222,31 +244,41 @@
             });
         });
 
-        // 3. Restored Form Submission Engine (URL-Encoded Form Data Format)
+        // 3. Restored Form Submission Engine (Asynchronous JSON Payload Transmission)
         const form = document.getElementById('contactForm');
         const responseDiv = document.getElementById('formResponse');
 
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop page reload
+            e.preventDefault(); // Stop standard page redirect behavior
             
-            // UI Feedback: Show loading status
+            // UI Feedback: Show transmission status layout update
             responseDiv.style.display = "block";
             responseDiv.style.backgroundColor = "rgba(26, 188, 156, 0.1)";
             responseDiv.style.color = "#1abc9c";
             responseDiv.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Transmitting message...';
 
-            // Package the data parameters using traditional form fields style
-            const formData = new FormData(form);
-            const urlEncodedData = new URLSearchParams(formData);
+            // Gather elements explicitly for the JSON object
+            const userKey = document.getElementById('access_key').value;
+            const userName = document.getElementById('name').value;
+            const userEmail = document.getElementById('email').value;
+            const userMessage = document.getElementById('message').value;
 
-            // Transmit data stream via traditional headers matching your credentials configuration
+            // RESTORED: Precise layout using JSON fields layout
+            const jsonObject = {
+                access_key: userKey,
+                name: userName,
+                email: userEmail,
+                message: userMessage
+            };
+
+            // Post clean application/json headers
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: urlEncodedData
+                body: JSON.stringify(jsonObject)
             })
             .then(async (response) => {
                 let jsonRes = await response.json();
@@ -257,15 +289,14 @@
                     responseDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i> Transmission successful! Raymond will reach out shortly.';
                     form.reset(); // Clear input elements cleanly
                 } else {
-                    // Log response server side anomalies
-                    console.log(response);
+                    // Output explicit backend warning message
                     responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
                     responseDiv.style.color = "#e74c3c";
-                    responseDiv.innerHTML = jsonRes.message || "Submission failed. Please verify credentials.";
+                    responseDiv.innerHTML = jsonRes.message || "Submission failed. Please check credentials.";
                 }
             })
             .catch(error => {
-                // Connection failure fallback implementation
+                // Connection interruption error tracking
                 console.log(error);
                 responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
                 responseDiv.style.color = "#e74c3c";
