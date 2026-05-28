@@ -162,13 +162,12 @@
             </a>
         </div>
 
-        <form id="contactForm" action="https://formspree.io/f/raymondtungaraza20@gmail.com" method="POST" target="_blank">
-            
+        <form id="contactForm">
             <div class="input-group">
                 <input type="text" id="name" name="name" placeholder="Identity / Organization Name" required>
             </div>
             <div class="input-group">
-                <input type="email" id="email" name="_replyto" placeholder="Secure Return Email Address" required>
+                <input type="email" id="email" name="email" placeholder="Secure Return Email Address" required>
             </div>
             <div class="input-group">
                 <textarea id="message" name="message" placeholder="Outline project operational scope, dataset details, or analytical goals..." required></textarea>
@@ -176,6 +175,8 @@
             <button type="submit" class="submit-btn">
                 <i class="fa-solid fa-paper-plane"></i> Dispatch Transmission
             </button>
+            
+            <div id="formResponse" style="display: none; margin-top: 15px; padding: 10px; border-radius: 8px; font-weight: 600;"></div>
         </form>
 
         <br><br>
@@ -214,6 +215,62 @@
         document.querySelectorAll('nav ul li a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinksList.classList.remove('active');
+            });
+        });
+
+        // 3. Asynchronous Form Engine (In-page background transmission)
+        const form = document.getElementById('contactForm');
+        const responseDiv = document.getElementById('formResponse');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop standard browser page redirect or tab switching completely
+            
+            // UI Status Update: Show loading status directly on the portfolio page
+            responseDiv.style.display = "block";
+            responseDiv.style.backgroundColor = "rgba(26, 188, 156, 0.1)";
+            responseDiv.style.color = "#1abc9c";
+            responseDiv.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending message...';
+
+            // Extract the user inputs from the form elements
+            const userName = document.getElementById('name').value;
+            const userEmail = document.getElementById('email').value;
+            const userMessage = document.getElementById('message').value;
+
+            // Construct the clean payload object matching Formspree requirements
+            const jsonObject = {
+                name: userName,
+                email: userEmail,
+                message: userMessage
+            };
+
+            // Post asynchronously in the background using direct JSON transmission headers
+            fetch('https://formspree.io/f/raymondtungaraza20@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(jsonObject)
+            })
+            .then(async (response) => {
+                if (response.ok) {
+                    // Success Display Update: Changes dynamically right over the contact form
+                    responseDiv.style.backgroundColor = "rgba(46, 204, 113, 0.1)";
+                    responseDiv.style.color = "#2ecc71";
+                    responseDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i> Transmission successful! Raymond will reach out shortly.';
+                    form.reset(); // Safely clear out form input blocks
+                } else {
+                    let jsonRes = await response.json();
+                    responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
+                    responseDiv.style.color = "#e74c3c";
+                    responseDiv.innerHTML = jsonRes.error || "Submission failed. Verification parameters missing.";
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
+                responseDiv.style.color = "#e74c3c";
+                responseDiv.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Transmission interrupted. Please check network link.';
             });
         });
     </script>
