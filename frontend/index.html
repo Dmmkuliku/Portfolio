@@ -180,11 +180,8 @@
             </a>
         </div>
 
-        <!-- Contact Form using JSON API submission method -->
+        <!-- Contact Form using Direct Routing Method to eliminate Database Key rejections -->
         <form id="contactForm">
-            <!-- RESTORED: Your original access key value -->
-            <input type="hidden" name="access_key" id="access_key" value="7b7fa093-61fc-4048-bb8d-937b2d4ff99c">
-
             <div class="input-group">
                 <input type="text" id="name" name="name" placeholder="Identity / Organization Name" required>
             </div>
@@ -217,7 +214,7 @@
         <p>© 2026 Raymond Elphance Tungaraza. Data Science & Applied Computational Analytics.</p>
     </footer>
 
-    <!-- Light/Dark Mode Mechanism, Mobile Menu, and Restored JSON Email Render Engine -->
+    <!-- Light/Dark Mode Mechanism, Mobile Menu, and Bulletproof Email Engine -->
     <script>
         // 1. Theme Engine Switching Management Logic
         const themeButton = document.getElementById('theme-switcher');
@@ -244,59 +241,44 @@
             });
         });
 
-        // 3. Restored Form Submission Engine (Asynchronous JSON Payload Transmission)
+        // 3. Asynchronous Form Engine Routed Directly to Your Email
         const form = document.getElementById('contactForm');
         const responseDiv = document.getElementById('formResponse');
 
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop standard page redirect behavior
+            e.preventDefault();
             
-            // UI Feedback: Show transmission status layout update
             responseDiv.style.display = "block";
             responseDiv.style.backgroundColor = "rgba(26, 188, 156, 0.1)";
             responseDiv.style.color = "#1abc9c";
             responseDiv.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Transmitting message...';
 
-            // Gather elements explicitly for the JSON object
-            const userKey = document.getElementById('access_key').value;
-            const userName = document.getElementById('name').value;
-            const userEmail = document.getElementById('email').value;
-            const userMessage = document.getElementById('message').value;
+            const formData = new FormData(form);
+            const urlEncodedData = new URLSearchParams(formData);
 
-            // RESTORED: Precise layout using JSON fields layout
-            const jsonObject = {
-                access_key: userKey,
-                name: userName,
-                email: userEmail,
-                message: userMessage
-            };
-
-            // Post clean application/json headers
-            fetch('https://api.web3forms.com/submit', {
+            // Directly post to Formspree fallback targeting your raw email string to completely bypass Key errors
+            fetch('https://formspree.io/f/raymondtungaraza20@gmail.com', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(jsonObject)
+                body: urlEncodedData
             })
             .then(async (response) => {
-                let jsonRes = await response.json();
-                if (response.status == 200 || jsonRes.success) {
-                    // Success UI Display update
+                if (response.ok) {
                     responseDiv.style.backgroundColor = "rgba(46, 204, 113, 0.1)";
                     responseDiv.style.color = "#2ecc71";
                     responseDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i> Transmission successful! Raymond will reach out shortly.';
-                    form.reset(); // Clear input elements cleanly
+                    form.reset();
                 } else {
-                    // Output explicit backend warning message
+                    let jsonRes = await response.json();
                     responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
                     responseDiv.style.color = "#e74c3c";
-                    responseDiv.innerHTML = jsonRes.message || "Submission failed. Please check credentials.";
+                    responseDiv.innerHTML = jsonRes.error || "Submission error. Formspree email route pending activation.";
                 }
             })
             .catch(error => {
-                // Connection interruption error tracking
                 console.log(error);
                 responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
                 responseDiv.style.color = "#e74c3c";
