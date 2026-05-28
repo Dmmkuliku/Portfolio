@@ -231,7 +231,7 @@ nav {
 }
 
 /* ==========================================
-   5. SKILLS GRID & VISUAL BADGES
+   5. SKILLS GRID & UNIQUE COMPONENT BADGES
    ========================================== */
 .skills-grid-container {
     display: grid;
@@ -272,6 +272,7 @@ nav {
     gap: 10px;
 }
 
+/* Base Badge Geometric Settings */
 .skill-badge {
     font-size: 0.85rem;
     padding: 8px 16px;
@@ -280,21 +281,43 @@ nav {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-primary);
+    border: 1px solid transparent;
     transition: all 0.2s ease;
 }
 
-.skill-badge:hover {
-    border-color: var(--accent);
-    background-color: var(--bg-secondary);
-}
+/* --- LIGHT MODE INDIVIDUAL BADGE COLORS --- */
+[data-theme="light"] .python { background-color: #e0f2fe; color: #0369a1; }       /* Sky Blue */
+[data-theme="light"] .r-lang { background-color: #e0e7ff; color: #1d4ed8; }       /* Royal Indigo Blue */
+[data-theme="light"] .ml { background-color: #fae8ff; color: #86198f; }           /* Muted Orchid Purple */
+[data-theme="light"] .sql { background-color: #ccfbf1; color: #0f766e; }          /* Mint Teal */
+[data-theme="light"] .bigdata { background-color: #ffedd5; color: #c2410c; }      /* Amber Orange */
+[data-theme="light"] .excel { background-color: #dcfce7; color: #15803d; }        /* Emerald Green */
+[data-theme="light"] .php { background-color: #f5f3ff; color: #5b21b6; }          /* Deep Violet */
+[data-theme="light"] .django { background-color: #f3f4f6; color: #1f2937; }       /* Carbon Gray */
+[data-theme="light"] .git { background-color: #fee2e2; color: #b91c1c; }          /* Crimson Red */
+[data-theme="light"] .web { background-color: #fef9c3; color: #a16207; }          /* Gold Leaf */
+[data-theme="light"] .cloud { background-color: #ecfeff; color: #0e7490; }        /* Clear Cyan */
+[data-theme="light"] .graphics { background-color: #fce7f3; color: #be185d; }     /* Soft Pink Rose */
 
-/* Tech Icon Brand Color Assignments */
-.python i { color: #3776AB; }
-.r-lang i { color: #276DC3; }
-.sql i { color: #00758F; }
-.php i { color: #777BB4; }
+/* --- DARK MODE INDIVIDUAL BADGE COLORS --- */
+[data-theme="dark"] .python { background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); }
+[data-theme="dark"] .r-lang { background-color: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3); }
+[data-theme="dark"] .ml { background-color: rgba(192, 132, 252, 0.15); color: #c084fc; border-color: rgba(192, 132, 252, 0.3); }
+[data-theme="dark"] .sql { background-color: rgba(45, 212, 191, 0.15); color: #2dd4bf; border-color: rgba(45, 212, 191, 0.3); }
+[data-theme="dark"] .bigdata { background-color: rgba(251, 146, 60, 0.15); color: #fb923c; border-color: rgba(251, 146, 60, 0.3); }
+[data-theme="dark"] .excel { background-color: rgba(74, 222, 128, 0.15); color: #4ade80; border-color: rgba(74, 222, 128, 0.3); }
+[data-theme="dark"] .php { background-color: rgba(129, 140, 248, 0.15); color: #818cf8; border-color: rgba(129, 140, 248, 0.3); }
+[data-theme="dark"] .django { background-color: rgba(156, 163, 175, 0.15); color: #e5e7eb; border-color: rgba(156, 163, 175, 0.3); }
+[data-theme="dark"] .git { background-color: rgba(248, 113, 113, 0.15); color: #f87171; border-color: rgba(248, 113, 113, 0.3); }
+[data-theme="dark"] .web { background-color: rgba(250, 204, 21, 0.15); color: #facc15; border-color: rgba(250, 204, 21, 0.3); }
+[data-theme="dark"] .cloud { background-color: rgba(34, 211, 238, 0.15); color: #22d3ee; border-color: rgba(34, 211, 238, 0.3); }
+[data-theme="dark"] .graphics { background-color: rgba(244, 114, 182, 0.15); color: #f472b6; border-color: rgba(244, 114, 182, 0.3); }
+
+/* Unified badge inheritance rules */
+.skill-badge i {
+    font-size: 0.95rem;
+    color: inherit;
+}
 
 /* ==========================================
    6. METRIC-DRIVEN TIMELINE ARCHITECTURE
@@ -522,6 +545,12 @@ form textarea {
 
 .submit-btn:hover {
     opacity: 0.95;
+}
+
+.submit-btn:disabled {
+    background-color: var(--text-secondary);
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 .map-wrapper {
