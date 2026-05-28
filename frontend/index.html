@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raymond Tungaraza | Data Science & Analytics Portfolio</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -163,8 +167,6 @@
         </div>
 
         <form id="contactForm">
-            <input type="hidden" name="access_key" value="7b7fa093-61fc-4048-bb8d-937b2d4ff99c">
-            
             <div class="input-group">
                 <input type="text" id="name" name="name" placeholder="Identity / Organization Name" required>
             </div>
@@ -174,7 +176,7 @@
             <div class="input-group">
                 <textarea id="message" name="message" placeholder="Outline project operational scope, dataset details, or analytical goals..." required></textarea>
             </div>
-            <button type="submit" class="submit-btn">
+            <button type="submit" class="submit-btn" id="submitBtn">
                 <i class="fa-solid fa-paper-plane"></i> Dispatch Transmission
             </button>
             
@@ -194,80 +196,6 @@
         <p>© 2026 Raymond Elphance Tungaraza. Data Science & Applied Computational Analytics.</p>
     </footer>
 
-    <script>
-        // 1. Theme Engine Switching Management Logic
-        const themeButton = document.getElementById('theme-switcher');
-        const htmlElement = document.documentElement;
-
-        themeButton.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            htmlElement.setAttribute('data-theme', targetTheme);
-        });
-
-        // 2. Mobile Layout Nav Open-Close Toggle Function
-        const menuIcon = document.getElementById('menu-icon');
-        const navLinksList = document.querySelector('nav ul');
-
-        menuIcon.addEventListener('click', () => {
-            navLinksList.classList.toggle('active');
-        });
-
-        // Close navigation menu when a link is clicked
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinksList.classList.remove('active');
-            });
-        });
-
-        // 3. Asynchronous Form Engine (Web3Forms Smooth In-Page Submission)
-        const form = document.getElementById('contactForm');
-        const responseDiv = document.getElementById('formResponse');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Lock down page redirect completely
-            
-            // Show loading state directly over the portfolio form
-            responseDiv.style.display = "block";
-            responseDiv.style.backgroundColor = "rgba(26, 188, 156, 0.1)";
-            responseDiv.style.color = "#1abc9c";
-            responseDiv.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending message...';
-
-            // Gather all data inside the form structure automatically
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            const jsonString = JSON.stringify(object);
-
-            // Send to Web3Forms background API endpoint
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: jsonString
-            })
-            .then(async (response) => {
-                let jsonRes = await response.json();
-                if (response.status == 200 || jsonRes.success) {
-                    // Success Update: Renders beautifully inside your contact section
-                    responseDiv.style.backgroundColor = "rgba(46, 204, 113, 0.1)";
-                    responseDiv.style.color = "#2ecc71";
-                    responseDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i> Transmission successful! Raymond will reach out shortly.';
-                    form.reset(); // Safely clear form values
-                } else {
-                    responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
-                    responseDiv.style.color = "#e74c3c";
-                    responseDiv.innerHTML = jsonRes.message || "Submission encountered a processing error.";
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
-                responseDiv.style.color = "#e74c3c";
-                responseDiv.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Transmission interrupted. Please check network link.';
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
