@@ -162,13 +162,13 @@
             </a>
         </div>
 
-        <form id="contactForm" action="https://formspree.io/f/raymondtungaraza20@gmail.com" method="POST">
+        <form id="contactForm" action="https://formspree.io/f/raymondtungaraza20@gmail.com" method="POST" target="_blank">
             
             <div class="input-group">
                 <input type="text" id="name" name="name" placeholder="Identity / Organization Name" required>
             </div>
             <div class="input-group">
-                <input type="email" id="email" name="email" placeholder="Secure Return Email Address" required>
+                <input type="email" id="email" name="_replyto" placeholder="Secure Return Email Address" required>
             </div>
             <div class="input-group">
                 <textarea id="message" name="message" placeholder="Outline project operational scope, dataset details, or analytical goals..." required></textarea>
@@ -211,4 +211,11 @@
         });
 
         // Close navigation menu when a link is clicked
-        document.querySelectorAll('nav ul
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinksList.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
