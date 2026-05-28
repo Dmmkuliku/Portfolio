@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. CORE ADVANCED DUAL-THEME ENGINE MATRIX (WCAG AA Compliant)
+   ========================================================================== */
 html[data-theme="dark"] {
     --bg-base: #1a252f;           /* Deep elegant obsidian slate */
     --bg-surface: #2c3e50;        /* Sleek card panel surfaces */
@@ -26,11 +29,6 @@ html[data-theme="light"] {
     --primary-dark: #16a085;
     --accent-whatsapp: #25D366;
     --accent-sms: #007AFF;
-    
-    /* Elite Academic Skill Badge Accents */
-    --ml-color: #e74c3c;
-    --bigdata-color: #e67e22;
-    --sql-color: #2980b9;
 }
 
 /* Global Document Reset Engine */
@@ -44,7 +42,8 @@ html[data-theme="light"] {
     transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
                 border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
                 color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.25s ease;
+                box-shadow 0.25s ease,
+                transform 0.25s ease;
 }
 
 body {
@@ -55,6 +54,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* ==========================================================================
+   2. HEADER, NAVIGATION & INTERACTIVE SWITCH ENGINE
+   ========================================================================== */
 header {
     background: rgba(44, 62, 80, 0.95);
     backdrop-filter: blur(10px);
@@ -74,6 +76,7 @@ nav {
     max-width: 1200px;
     margin: auto;
     padding: 0 2rem;
+    width: 100%;
 }
 
 .logo {
@@ -170,6 +173,9 @@ nav ul li a:hover::after {
     padding: 0.5rem;
 }
 
+/* ==========================================================================
+   3. HERO INFRASTRUCTURE & SEMANTIC COMPONENT CARDS
+   ========================================================================== */
 .hero {
     background: var(--hero-gradient);
     color: #ffffff;
@@ -255,6 +261,9 @@ section {
     border-radius: 2px;
 }
 
+/* ==========================================================================
+   4. TECHNICAL GRID PILLS AND COMPONENT BADGES (High Visibility)
+   ========================================================================== */
 .skills-grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -282,33 +291,43 @@ section {
     gap: 0.5rem;
 }
 
-/* Explicit Readability Enforcement on Badge Inlines */
+/* Hardcoded High-Contrast Enforcement Layer for Colored Badges */
 .skill-badge {
-    padding: 0.5rem 0.8rem;
-    color: #ffffff !important; /* Forces layout text visibility across theme shifts */
+    padding: 0.55rem 0.85rem;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: 700; /* Bold text structure for extreme legibility */
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.5rem;
     font-size: 0.85rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    color: #ffffff !important; /* Force text to stay white on all background variations */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); /* Micro text-shadow for crisp readability */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
 }
 
-/* Color Classes Mapping Configuration Layout */
-.r-lang { background: #1f618d; }
-.python { background: #2e4053; }
-.excel { background: #1e8449; }
-.php { background: #76448a; }
-.git { background: #a04000; }
-.web { background: #d35400; }
-.django { background: #117a65; }
-.cloud { background: #2980b9; }
-.graphics { background: #9b59b6; }
-.ml { background: var(--ml-color); }
-.bigdata { background: var(--bigdata-color); }
-.sql { background: var(--sql-color); }
+/* Ensure FontAwesome icons within badges stay white too */
+.skill-badge i {
+    color: #ffffff !important;
+}
 
+/* Highly Visible, Saturated Elite Brand Colors for Light/Dark Adaptability */
+.r-lang   { background-color: #2980b9 !important; } /* Vibrant Dark Blue */
+.python   { background-color: #34495e !important; } /* Sharp Deep Slate */
+.excel    { background-color: #27ae60 !important; } /* Crisp Emerald Green */
+.php      { background-color: #8e44ad !important; } /* Royal Deep Amethyst Purple */
+.git      { background-color: #d35400 !important; } /* Rust Deep Orange */
+.web      { background-color: #e67e22 !important; } /* Saturated Amber Orange */
+.django   { background-color: #16a085 !important; } /* Rich Teal Mountain Blue Green */
+.cloud    { background-color: #1f618d !important; } /* Clear Ocean Azure Sky Blue */
+.graphics { background-color: #9b59b6 !important; } /* Clean Lavender Orchid Purple */
+.ml       { background-color: #e74c3c !important; } /* Radiant Crimson Red */
+.bigdata  { background-color: #f39c12 !important; } /* Golden Mustard Alert Yellow */
+.sql      { background-color: #3498db !important; } /* Sky High Blue Accent */
+
+/* ==========================================================================
+   5. ACADEMIC TIMELINE, PROJECT DISPLAY & INTERACTIVE FEEDBACK
+   ========================================================================== */
 .timeline {
     border-left: 3px solid var(--primary-color);
     padding-left: 2rem;
@@ -403,6 +422,9 @@ section {
     outline: 2px solid var(--primary-color);
 }
 
+/* ==========================================================================
+   6. REAL-TIME ASYNC COMMUNICATIONS & STATUS ALERTS
+   ========================================================================== */
 .status-container {
     text-align: center;
     margin-bottom: 2rem;
@@ -533,6 +555,9 @@ footer {
     font-size: 0.95rem;
 }
 
+/* ==========================================================================
+   7. ADVANCED UNIFIED DEVICE BREAKPOINTS (Mobile Touch Targets)
+   ========================================================================== */
 @media (max-width: 992px) {
     .hero h1 { font-size: 2.6rem; }
     section { padding: 2.5rem 1.5rem; }
