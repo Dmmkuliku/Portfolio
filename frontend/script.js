@@ -1,14 +1,7 @@
-/**
- * Raymond Elphance - Professional Portfolio Operations Engine
- * Handles Native Theme Switching Systems & Asynchronous Cloud API Integration
- */
-
 const API_BASE_URL = "https://portfolio-backend-rmoy.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
-    // ==========================================================================
-    // 1. THEME SWITCHER & STATE MANAGEMENT CONTROLLER
-    // ==========================================================================
+
     const themeToggleBtn = document.getElementById("themeToggle");
     
     // Check local storage memory cache or default to user system setting
@@ -33,9 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ==========================================================================
-    // 2. LIVE CLOUD BACKEND HANDSHAKE & STATUS MONITORING
-    // ==========================================================================
     const statusElement = document.getElementById("api-status");
     const contactForm = document.getElementById("contactForm");
     const formResponse = document.getElementById("formResponse");
@@ -57,9 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
             statusElement.className = "status-banner status-error";
         });
 
-    // ==========================================================================
-    // 3. SECURE ASYNCHRONOUS FORM SUBMISSION HUB
-    // ==========================================================================
+
     if (contactForm) {
         contactForm.addEventListener("submit", async (e) => {
             e.preventDefault();
