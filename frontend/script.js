@@ -1,89 +1,77 @@
-const API_BASE_URL = "https://portfolio-backend-rmoy.onrender.com";
+// =========================================================================
+// 1. THEME ENGINE SWITCHING MANAGEMENT LOGIC
+// =========================================================================
+const themeButton = document.getElementById('theme-switcher');
+const htmlElement = document.documentElement;
 
-document.addEventListener("DOMContentLoaded", () => {
+themeButton.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    htmlElement.setAttribute('data-theme', targetTheme);
+});
 
-    const themeToggleBtn = document.getElementById("themeToggle");
+// =========================================================================
+// 2. MOBILE LAYOUT NAV OPEN-CLOSE TOGGLE FUNCTION
+// =========================================================================
+const menuIcon = document.getElementById('menu-icon');
+const navLinksList = document.querySelector('nav ul');
+
+menuIcon.addEventListener('click', () => {
+    navLinksList.classList.toggle('active');
+});
+
+// Smooth close navigation links upon mobile interaction selection
+document.querySelectorAll('nav ul li a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinksList.classList.remove('active');
+    });
+});
+
+// =========================================================================
+// 3. EMAILJS TRANSMIT SUBSYSTEM FRAMEWORK 
+// =========================================================================
+emailjs.init("ouZgiQcXpiQ0t3jST"); 
+
+const form = document.getElementById('contactForm');
+const responseDiv = document.getElementById('formResponse');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault(); 
     
-    // Check local storage memory cache or default to user system setting
-    const cachedTheme = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
-    if (cachedTheme) {
-        document.documentElement.setAttribute("data-theme", cachedTheme);
-    } else {
-        const initialTheme = systemPrefersDark ? "dark" : "light";
-        document.documentElement.setAttribute("data-theme", initialTheme);
-    }
+    // Activate loading overlay states
+    responseDiv.style.display = "block";
+    responseDiv.style.backgroundColor = "rgba(26, 188, 156, 0.1)";
+    responseDiv.style.color = "#1abc9c";
+    responseDiv.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Initializing Routing Protocols...';
+    submitBtn.disabled = true;
 
-    // Interactive Theme Toggle Click Listener
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener("click", () => {
-            const currentTheme = document.documentElement.getAttribute("data-theme");
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
-            
-            document.documentElement.setAttribute("data-theme", newTheme);
-            localStorage.setItem("theme", newTheme);
-        });
-    }
+    // Package explicit object mapping metrics
+    const templateParams = {
+        user_name: document.getElementById('name').value,
+        user_email: document.getElementById('email').value,
+        project_message: document.getElementById('message').value
+    };
 
-    const statusElement = document.getElementById("api-status");
-    const contactForm = document.getElementById("contactForm");
-    const formResponse = document.getElementById("formResponse");
+    const SERVICE_ID = "service_9osk5to";   
+    const TEMPLATE_ID = "template_u4d0rcq"; 
 
-    // Ping the backend API endpoint to evaluate connection state
-    fetch(`${API_BASE_URL}/api/status`)
-        .then(response => {
-            if (!response.ok) throw new Error("Server network negotiation anomaly");
-            return response.json();
-        })
-        .then(data => {
-            // Update the layout context seamlessly using theme-compliant styles
-            statusElement.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${data.message}`;
-            statusElement.className = "status-banner status-success";
-        })
-        .catch(error => {
-            console.error("Status Ping Error Execution context:", error);
-            statusElement.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Server sleeping. Wake-up takes ~30 seconds.`;
-            statusElement.className = "status-banner status-error";
-        });
-
-
-    if (contactForm) {
-        contactForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const message = document.getElementById("message").value;
-
-            // Display an elegant, theme-compliant loading state
-            formResponse.className = "form-alert alert-loading";
-            formResponse.innerHTML = `<p><i class="fa-solid fa-spinner fa-spin"></i> Transmitting your secure payload data to Raymond...</p>`;
-
-            try {
-                const response = await fetch(`${API_BASE_URL}/api/contact`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ name, email, message })
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    formResponse.className = "form-alert alert-success";
-                    formResponse.innerHTML = `<p><i class="fa-solid fa-square-check"></i> ${result.success || 'Message transmitted successfully.'}</p>`;
-                    contactForm.reset();
-                } else {
-                    formResponse.className = "form-alert alert-error";
-                    formResponse.innerHTML = `<p><i class="fa-solid fa-triangle-exclamation"></i> ${result.error || 'Server validation error encountered.'}</p>`;
-                }
-            } catch (err) {
-                console.error("Form Submission Error Execution context:", err);
-                formResponse.className = "form-alert alert-error";
-                formResponse.innerHTML = `<p><i class="fa-solid fa-triangle-exclamation"></i> Transmission pipeline error. Please attempt again later.</p>`;
-            }
-        });
-    }
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+    .then(() => {
+        // Successful API Response
+        responseDiv.style.backgroundColor = "rgba(46, 204, 113, 0.1)";
+        responseDiv.style.color = "#2ecc71";
+        responseDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i> Transmission successful! Raymond will reach out shortly.';
+        form.reset(); 
+    })
+    .catch((error) => {
+        console.error('EmailJS Routing Interrupt Node:', error);
+        // Error handling fallback presentation
+        responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
+        responseDiv.style.color = "#e74c3c";
+        responseDiv.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Transmission error. Please fallback to direct WhatsApp linking.';
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+    });
 });
