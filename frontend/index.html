@@ -180,29 +180,34 @@
             </a>
         </div>
 
-        <!-- Contact Entry Engine Layout -->
+        <!-- Fully Functional Contact Form linked directly to Web3Forms Gateway -->
         <form id="contactForm">
+            <!-- This hidden key configures the endpoint to route messages straight to raymondtungaraza20@gmail.com -->
+            <input type="hidden" name="access_key" value="7b7fa093-61fc-4048-bb8d-937b2d4ff99c">
+            
+            <!-- Anti-spam honeypot (Invisible to human users) -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
             <div class="input-group">
-                <input type="text" id="name" placeholder="Identity / Organization Name" required>
+                <input type="text" id="name" name="name" placeholder="Identity / Organization Name" required>
             </div>
             <div class="input-group">
-                <input type="email" id="email" placeholder="Secure Return Email Address" required>
+                <input type="email" id="email" name="email" placeholder="Secure Return Email Address" required>
             </div>
             <div class="input-group">
-                <textarea id="message" placeholder="Outline project operational scope, dataset details, or analytical goals..." required></textarea>
+                <textarea id="message" name="message" placeholder="Outline project operational scope, dataset details, or analytical goals..." required></textarea>
             </div>
             <button type="submit" class="submit-btn">
                 <i class="fa-solid fa-paper-plane"></i> Dispatch Transmission
             </button>
             
-            <!-- Real-time dynamic response tracking element target -->
-            <div id="formResponse" style="display: none;"></div>
+            <!-- Dynamic placeholder targeting async engine callback status styles -->
+            <div id="formResponse" style="display: none; margin-top: 15px; padding: 10px; border-radius: 8px; font-weight: 600;"></div>
         </form>
 
         <br><br>
         <!-- Map Geometric Tracking Embed Space -->
         <div class="map-wrapper">
-            <!-- Focused on Changanyikeni, Ubungo, Dar es Salaam coordinates explicitly -->
             <iframe 
                 src="https://maps.google.com/maps?q=Changanyikeni,%20Ubungo,%20Dar%20es%20Salaam&t=&z=14&ie=UTF8&iwloc=&output=embed" 
                 width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
@@ -215,9 +220,9 @@
         <p>&copy; 2026 Raymond Elphance Tungaraza. Data Science & Applied Computational Analytics.</p>
     </footer>
 
-    <!-- Light/Dark Mode Mechanism and Navigation Menu Script -->
+    <!-- Light/Dark Mode Mechanism, Mobile Menu, and Secure Email API Engine -->
     <script>
-        // Theme Engine Switching Management Logic
+        // 1. Theme Engine Switching Management Logic
         const themeButton = document.getElementById('theme-switcher');
         const htmlElement = document.documentElement;
 
@@ -227,7 +232,7 @@
             htmlElement.setAttribute('data-theme', targetTheme);
         });
 
-        // Mobile Layout Nav Open-Close Toggle Function
+        // 2. Mobile Layout Nav Open-Close Toggle Function
         const menuIcon = document.getElementById('menu-icon');
         const navLinksList = document.querySelector('nav ul');
 
@@ -239,6 +244,57 @@
         document.querySelectorAll('nav ul li a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinksList.classList.remove('active');
+            });
+        });
+
+        // 3. Asynchronous Form Submission Engine (Web3Forms API Connection)
+        const form = document.getElementById('contactForm');
+        const responseDiv = document.getElementById('formResponse');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop page from parsing standard browser reload refresh updates
+            
+            // UI Feedback: Show loading status to user immediately
+            responseDiv.style.display = "block";
+            responseDiv.style.backgroundColor = "rgba(26, 188, 156, 0.1)";
+            responseDiv.style.color = "#1abc9c";
+            responseDiv.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Encrypting & transmitting message...';
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            // Transmit payload data parameters directly to endpoint matrix linked to your email
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let jsonRes = await response.json();
+                if (response.status == 200) {
+                    // Success UI Display state update
+                    responseDiv.style.backgroundColor = "rgba(46, 204, 113, 0.1)";
+                    responseDiv.style.color = "#2ecc71";
+                    responseDiv.innerHTML = '<i class="fa-solid fa-circle-check"></i> Transmission successful! Raymond will reach out shortly.';
+                    form.reset(); // Clear input elements safely
+                } else {
+                    // Log response server side data anomalies
+                    console.log(response);
+                    responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
+                    responseDiv.style.color = "#e74c3c";
+                    responseDiv.innerHTML = jsonRes.message;
+                }
+            })
+            .catch(error => {
+                // Connection interruption error fallback mechanism
+                console.log(error);
+                responseDiv.style.backgroundColor = "rgba(231, 76, 60, 0.1)";
+                responseDiv.style.color = "#e74c3c";
+                responseDiv.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Transmission interrupted. Please check network link.';
             });
         });
     </script>
