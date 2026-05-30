@@ -1,76 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. PERSISTENT LIGHT / DARK MODE CONTROLLER
+    // 1. THEME & MENU LOGIC
     const themeSwitcher = document.getElementById("theme-switcher");
-    const currentTheme = localStorage.getItem("theme") || "light";
-    document.documentElement.setAttribute("data-theme", currentTheme);
+    const menuIcon = document.getElementById("menu-icon");
+    const navMenu = document.getElementById("nav-menu");
+    
+    document.documentElement.setAttribute("data-theme", localStorage.getItem("theme") || "light");
     
     themeSwitcher.addEventListener("click", () => {
-        let theme = document.documentElement.getAttribute("data-theme");
-        let newTheme = (theme === "light") ? "dark" : "light";
+        let newTheme = (document.documentElement.getAttribute("data-theme") === "light") ? "dark" : "light";
         document.documentElement.setAttribute("data-theme", newTheme);
         localStorage.setItem("theme", newTheme);
     });
 
-    // 2. RESPONSIVE MOBILE DRAWERS & MENUS
-    const menuIcon = document.getElementById("menu-icon");
-    const navMenu = document.getElementById("nav-menu");
-    const navLinks = document.querySelectorAll(".nav-link");
+    if (menuIcon) menuIcon.addEventListener("click", () => navMenu.classList.toggle("mobile-active"));
 
-    if (menuIcon && navMenu) {
-        menuIcon.addEventListener("click", () => {
-            navMenu.classList.toggle("mobile-active");
-        });
-    }
-
-    navLinks.forEach(link => {
-        link.addEventListener("click", () => {
-            if (navMenu.classList.contains("mobile-active")) {
-                navMenu.classList.remove("mobile-active");
-            }
-        });
-    });
-
-    // 3. BACKEND API INTEGRATION (ASSIGNMENT REQUIREMENT)
-    const API_URL = "https://portfolio-backend-3r1v.onrender.com";
+    // 2. CONTACT ENGINE
     const contactForm = document.getElementById("contactForm");
     const submitBtn = document.getElementById("submitBtn");
     const formResponse = document.getElementById("formResponse");
+    const API_URL = "https://portfolio-backend-3r1v.onrender.com/api/contact";
 
     if (contactForm) {
         contactForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Dispatching Transmission...`;
-            
-            const payload = {
-                name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
-                message: document.getElementById("message").value
-            };
+            submitBtn.innerHTML = `Dispatching...`;
 
             try {
-                const response = await fetch(`${API_URL}/api/contact`, {
+                const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({
+                        name: document.getElementById("name").value,
+                        email: document.getElementById("email").value,
+                        message: document.getElementById("message").value
+                    })
                 });
 
                 if (response.ok) {
                     formResponse.style.display = "block";
-                    formResponse.style.color = "#10b981";
-                    formResponse.innerHTML = `<i class="fa-solid fa-circle-check"></i> Transmission successful. Data routed to server.`;
+                    formResponse.innerHTML = `Transmission successful. Routing complete.`;
                     contactForm.reset();
-                } else {
-                    throw new Error("Server rejected request");
                 }
-            } catch (error) {
-                formResponse.style.display = "block";
-                formResponse.style.color = "#ef4444";
-                formResponse.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Transmission failed. API connection issue.`;
+            } catch (err) {
+                formResponse.innerHTML = `Transmission error. Path unavailable.`;
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Dispatch Transmission`;
+                submitBtn.innerHTML = `Dispatch Transmission`;
             }
         });
     }
