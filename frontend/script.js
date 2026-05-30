@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (menuIcon) menuIcon.addEventListener("click", () => navMenu.classList.toggle("mobile-active"));
 
-    // 2. CONTACT ENGINE
+    // 2. CONTACT ENGINE (Backend Integration)
     const contactForm = document.getElementById("contactForm");
     const submitBtn = document.getElementById("submitBtn");
     const formResponse = document.getElementById("formResponse");
@@ -41,8 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     formResponse.style.display = "block";
                     formResponse.innerHTML = `Transmission successful. Routing complete.`;
                     contactForm.reset();
+                } else {
+                    throw new Error("Server error");
                 }
             } catch (err) {
+                formResponse.style.display = "block";
                 formResponse.innerHTML = `Transmission error. Path unavailable.`;
             } finally {
                 submitBtn.disabled = false;
