@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const contactForm = document.getElementById("contactForm");
     const submitBtn = document.getElementById("submitBtn");
     const formResponse = document.getElementById("formResponse");
-    const API_URL = "https://portfolio-backend-3r1v.onrender.com/api/contact";
+    const API_URL = "https://portfolio-backend-3r1v.onrender.com";
 
     if (contactForm) {
         contactForm.addEventListener("submit", async (e) => {
